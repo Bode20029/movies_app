@@ -1,6 +1,7 @@
 import { useEffect , useState } from 'react';
 import Search from './components/search';
 import MovieCard from './components/MovieCard';
+import Spinner from './components/Spinner';
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -26,6 +27,7 @@ const App = () => {
       const endpoint = query 
       ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
       : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+
       const response = await fetch(endpoint, API_OPTIONS);
       
       if (!response.ok) {
