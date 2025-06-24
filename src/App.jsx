@@ -14,6 +14,8 @@ const API_OPTIONS = {
 const App = () => {
   const [searchTerm,setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [movieList, setMovieList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() =>  {
     const fetchMovies = async () => {
@@ -25,10 +27,18 @@ const App = () => {
         throw new Error('Failed to fetch movies');
       }
       const data = await response.json();
-      console.log(data);
+      
+      if(data.response === 'false') {
+        setErrorMessage(data.error || 'An error occurred while fetching movies.');
+        setMovieList([]);
+        return;
+      }
+      setMovieList(data.results || []);
     } catch (error) {
       console.error(`Error fetching movies: ${error}`);
       setErrorMessage('Failed to fetch movies. Please try again later.');
+    } finally {
+      setIsLoading(false);
     }
   }; 
   fetchMovies(); }, []);
