@@ -93,10 +93,10 @@ const App = () => {
         <section className='trending'>
           <h2>Trending Movies</h2>
           <ul>
-            {trendingMovies.map((movies, index) => (
-              <li key={movies.$id} >
+            {trendingMovies.map((movie, index) => (
+              <li key={movie.$id} >
                 <p>{index + 1} </p>
-                <img src={movies.poster_url} alt={movies.title} />
+                <img src={movie.poster_url} alt={movie.title} />
 
               </li>
             ))}
@@ -112,8 +112,8 @@ const App = () => {
            <p className='text-red-500'>{errorMessage}</p>
         ) : (
           <ul>
-            { movieList.map((movies) => (
-              <MovieCard key={movies.id} movie={movies} />
+            { movieList.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
             ))}
           </ul>
         )

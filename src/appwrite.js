@@ -10,7 +10,7 @@ const client = new Client()
 
 const database = new Databases(client);
 
-export const updateSearchCount = async (searchTerm, movies) => {
+export const updateSearchCount = async (searchTerm, movie) => {
     // 1. Use Appwrite SDK to check if the search term exists in the database
     try {
         const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
@@ -28,8 +28,8 @@ export const updateSearchCount = async (searchTerm, movies) => {
             await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
                 searchTerm,
                 count: 1,
-                movie_id: movies,
-                poster_url: `https://image.tmdb.org/t/p/w500/${movies.poster_path}`,
+                movie_id: movie,
+                poster_url: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
             });
 
     }
